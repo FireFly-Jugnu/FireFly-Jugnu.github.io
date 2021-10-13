@@ -16,7 +16,7 @@
     
     
       
-        <title>Installation - Jugnu</title>
+        <title>Reference Collections - Jugnu</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#reference-collections" class="md-skip">
           Skip to content
         </a>
       
@@ -89,7 +89,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Installation
+              Reference Collections
             
           </span>
         </div>
@@ -222,20 +222,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
       Installation
     </a>
-    
   </li>
 
         
@@ -255,11 +246,63 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../reference_collections/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Reference Collections
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Reference Collections
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-document" class="md-nav__link">
+    Create Document
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-single-document-with-key" class="md-nav__link">
+    Query Single Document with Key
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-document" class="md-nav__link">
+    Delete Document
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -297,6 +340,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#create-document" class="md-nav__link">
+    Create Document
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-single-document-with-key" class="md-nav__link">
+    Query Single Document with Key
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-document" class="md-nav__link">
+    Delete Document
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -308,10 +380,89 @@
               
                 
                 
-                <h1 id="installation">Installation</h1>
-<p>Include jugnu in your <code>package.json</code> </p>
-<p>OR </p>
-<p>Install it : <code>npm install @fire-fly/jugnu</code></p>
+                <h1 id="reference-collections">Reference Collections</h1>
+<p>Firebase allows you to reference documents of other collections. </p>
+<p>Consider the example below of Person and Anddress</p>
+<pre><code>@FirebaseCollection
+class Address {
+    @DocumentKey
+    addrKey: String = &quot;&quot;;
+
+    @DocumentField
+    streetName?: String;
+
+    @DocumentField
+    houseNumer?: String;
+}
+</code></pre>
+<p>The Person document has a address field that stores reference to the address</p>
+<pre><code>@FirebaseCollection
+class Person{
+
+    @DocumentKey
+    name: String;
+
+    @DocumentField
+    age: Number;
+
+    location?: String;
+
+    @DocumentField
+    phone: String;
+
+    @DocumentField
+    homeAddress?: Address;
+
+    constructor(name: String){
+        this.name = name;
+    }
+
+}
+</code></pre>
+<h2 id="create-document">Create Document</h2>
+<p>Create the address by the normal method.</p>
+<pre><code>const addressCollection = jugnu.createFirebaseCollection(Address);
+
+const addr = new Address();
+addr.addrKey = &quot;Varun-Addr&quot;;
+addr.streetName = &quot;My Street Address&quot;;
+addr.houseNumer = &quot;My House No&quot;;
+addressCollection.create(addr);     // Create new Address
+</code></pre>
+<p>Create person, with reference to Address.</p>
+<pre><code>const personCollection = jugnu.createFirebaseCollection(Person);
+
+const varun = new Person(&quot;Varun Verma&quot;);
+varun.age = 25;
+varun.location = &quot;India&quot;;
+varun.phone = &quot;+91-1234567890&quot;;
+varun.homeAddress = addr;           // Set address in Person
+
+personCollection.create(varun); 
+
+</code></pre>
+<p>The person document is created with Address as a reference document
+<img alt="Person Document" src="../images/person_document.png" /> </p>
+<h2 id="query-single-document-with-key">Query Single Document with Key</h2>
+<p>Querying document will also query the referenced documents and populate their properties.</p>
+<pre><code>let p: Person;
+p = await personCollection.getDocument(&quot;Varun Verma&quot;);
+console.log(&quot;Person Details&quot;, p);
+</code></pre>
+<p>The output will be: </p>
+<pre><code>Person {
+  age: 25,
+  phone: '+91-1234567890',
+  homeAddress: {
+    houseNumer: 'My House No',
+    addrKey: 'Varun-Addr',
+    streetName: 'My Street Address'
+  },
+  name: 'Varun Verma'
+}
+</code></pre>
+<h2 id="delete-document">Delete Document</h2>
+<p>Delete will delete only the main document. The referenced document will not be deleted.</p>
                 
               
               
@@ -330,7 +481,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../basic_usage/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -339,19 +490,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Jugnu
+                Usage
               </div>
             </div>
           </a>
         
         
-          <a href="../basic_usage/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../limitations/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Usage
+                Limitations
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

@@ -16,7 +16,7 @@
     
     
       
-        <title>Usage - Jugny</title>
+        <title>Limitations - Jugnu</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#usage" class="md-skip">
+        <a href="#known-limitations" class="md-skip">
           Skip to content
         </a>
       
@@ -72,7 +72,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="Jugny" class="md-header-nav__button md-logo" aria-label="Jugny">
+    <a href=".." title="Jugnu" class="md-header-nav__button md-logo" aria-label="Jugnu">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -85,11 +85,11 @@
       
         <div class="md-header-nav__ellipsis">
           <span class="md-header-nav__topic md-ellipsis">
-            Jugny
+            Jugnu
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Usage
+              Limitations
             
           </span>
         </div>
@@ -173,13 +173,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Jugny" class="md-nav__button md-logo" aria-label="Jugny">
+    <a href=".." title="Jugnu" class="md-nav__button md-logo" aria-label="Jugnu">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    Jugny
+    Jugnu
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -213,7 +213,7 @@
 
   <li class="md-nav__item">
     <a href=".." class="md-nav__link">
-      Home
+      Jugnu
     </a>
   </li>
 
@@ -234,6 +234,30 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../basic_usage/" class="md-nav__link">
+      Usage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference_collections/" class="md-nav__link">
+      Reference Collections
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -244,59 +268,9 @@
       
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Usage
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
     <a href="./" class="md-nav__link md-nav__link--active">
-      Usage
+      Limitations
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    Annotations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-document" class="md-nav__link">
-    Create Document
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-documents" class="md-nav__link">
-    Query Documents
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#delete-document" class="md-nav__link">
-    Delete Document
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
     
   </li>
 
@@ -323,42 +297,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    Annotations
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#create-document" class="md-nav__link">
-    Create Document
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-documents" class="md-nav__link">
-    Query Documents
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#delete-document" class="md-nav__link">
-    Delete Document
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -370,43 +308,7 @@
               
                 
                 
-                <h1 id="usage">Usage</h1>
-<p>Jugnu is compaitable with other Javascript frameworks.</p>
-<h2 id="annotations">Annotations</h2>
-<p>Annotate your typescript classes and members. Create any class that represents an entity.</p>
-<pre><code>@FirebaseCollection
-class Person{
-
-    @DocumentKey
-    name: String;
-
-    @DocumentField
-    age: Number;
-
-    location?: String;
-
-    @DocumentField
-    phone: String;
-}
-</code></pre>
-<h2 id="create-document">Create Document</h2>
-<pre><code>const personCollection = jugnu.createFirebaseCollection(Person);
-
-const varun = new Person(&quot;Varun Verma&quot;);
-varun.age = 25;
-varun.location = &quot;India&quot;;
-varun.phone = &quot;+91-1234567890&quot;;
-
-personCollection.create(varun);
-</code></pre>
-<h2 id="query-documents">Query Documents</h2>
-<pre><code>const personList: Person[];
-personList = await personCollection.query([]); 
-console.log(personList);
-</code></pre>
-<h2 id="delete-document">Delete Document</h2>
-<pre><code>await personCollection.delete(varun);
-</code></pre>
+                <h1 id="known-limitations">Known Limitations</h1>
                 
               
               
@@ -425,7 +327,7 @@ console.log(personList);
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../installation/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../reference_collections/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -434,7 +336,7 @@ console.log(personList);
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Installation
+                Reference Collections
               </div>
             </div>
           </a>

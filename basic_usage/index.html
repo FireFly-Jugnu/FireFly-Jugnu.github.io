@@ -16,7 +16,7 @@
     
     
       
-        <title>Installation - Jugnu</title>
+        <title>Usage - Jugnu</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#usage" class="md-skip">
           Skip to content
         </a>
       
@@ -89,7 +89,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Installation
+              Usage
             
           </span>
         </div>
@@ -222,6 +222,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../installation/" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -232,22 +244,67 @@
       
     
     
-    <a href="./" class="md-nav__link md-nav__link--active">
-      Installation
-    </a>
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Usage
+        <span class="md-nav__icon md-icon"></span>
+      </label>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../basic_usage/" class="md-nav__link">
+    <a href="./" class="md-nav__link md-nav__link--active">
       Usage
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    Annotations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-document" class="md-nav__link">
+    Create Document
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-documents" class="md-nav__link">
+    Query Documents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-single-document-with-key" class="md-nav__link">
+    Query Single Document with Key
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-document" class="md-nav__link">
+    Delete Document
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -297,6 +354,49 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    Annotations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-document" class="md-nav__link">
+    Create Document
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-documents" class="md-nav__link">
+    Query Documents
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query-single-document-with-key" class="md-nav__link">
+    Query Single Document with Key
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-document" class="md-nav__link">
+    Delete Document
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -308,10 +408,52 @@
               
                 
                 
-                <h1 id="installation">Installation</h1>
-<p>Include jugnu in your <code>package.json</code> </p>
-<p>OR </p>
-<p>Install it : <code>npm install @fire-fly/jugnu</code></p>
+                <h1 id="usage">Usage</h1>
+<p>Jugnu is compaitable with other Javascript frameworks.</p>
+<h2 id="annotations">Annotations</h2>
+<p>Annotate your typescript classes and members. Create any class that represents an entity.</p>
+<pre><code>@FirebaseCollection
+class Person{
+
+    @DocumentKey
+    name: String;
+
+    @DocumentField
+    age: Number;
+
+    location?: String;
+
+    @DocumentField
+    phone: String;
+
+    constructor(name: String){
+        this.name = name;
+    }
+}
+</code></pre>
+<h2 id="create-document">Create Document</h2>
+<pre><code>const personCollection = jugnu.createFirebaseCollection(Person);
+
+const varun = new Person(&quot;Varun Verma&quot;);
+varun.age = 25;
+varun.location = &quot;India&quot;;
+varun.phone = &quot;+91-1234567890&quot;;
+
+personCollection.create(varun);
+</code></pre>
+<h2 id="query-documents">Query Documents</h2>
+<pre><code>const personList: Person[];
+personList = await personCollection.query([]); 
+console.log(personList);
+</code></pre>
+<h2 id="query-single-document-with-key">Query Single Document with Key</h2>
+<pre><code>let p: Person;
+p = await personCollection.getDocument(&quot;Varun Verma&quot;);
+console.log(&quot;Person Details&quot;, p);
+</code></pre>
+<h2 id="delete-document">Delete Document</h2>
+<pre><code>await personCollection.delete(varun);
+</code></pre>
                 
               
               
@@ -330,7 +472,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href=".." class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../installation/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -339,19 +481,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Jugnu
+                Installation
               </div>
             </div>
           </a>
         
         
-          <a href="../basic_usage/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../reference_collections/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Usage
+                Reference Collections
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
