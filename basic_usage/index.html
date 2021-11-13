@@ -330,6 +330,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#update-an-document" class="md-nav__link">
+    Update an Document
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#delete-document" class="md-nav__link">
     Delete Document
   </a>
@@ -367,6 +374,20 @@
     <li class="md-nav__item">
       <a href="../annotations/" class="md-nav__link">
         Annotation Details
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pub_sub/" class="md-nav__link">
+        Pub-Sub
       </a>
     </li>
   
@@ -449,6 +470,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#update-an-document" class="md-nav__link">
+    Update an Document
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#delete-document" class="md-nav__link">
     Delete Document
   </a>
@@ -476,17 +504,20 @@
 class Person{
 
     @DocumentKey(DocumentKeyType.UserDefined)
-    name: String;
+    name: string;
 
     @DocumentField
-    age: Number;
-
-    location?: String;
+    age: number;
 
     @DocumentField
-    phone: String;
+    city: string;
 
-    constructor(name: String){
+    location?: string;
+
+    @DocumentField
+    phone: string;
+
+    constructor(name: string){
         this.name = name;
     }
 }
@@ -497,19 +528,36 @@ class Person{
 const varun = new Person(&quot;Varun Verma&quot;);
 varun.age = 25;
 varun.location = &quot;India&quot;;
+varun.city = &quot;Bangalore&quot;;
 varun.phone = &quot;+91-1234567890&quot;;
 
 personCollection.create(varun);
 </code></pre>
+<p>If a field is not annotated with <code>@DocumentField</code>, then it wont be saved. </p>
 <h2 id="query-documents">Query Documents</h2>
+<p>The query function takes where conditions as defined by the <a href="https://firebase.google.com/docs/firestore/query-data/queries">Firebase</a></p>
 <pre><code>const personList: Person[];
-personList = await personCollection.query([]); 
+const searchCondition = [{
+    field: &quot;city&quot;,
+    condition: &quot;==&quot;,
+    value: &quot;Bangalore&quot;
+}];
+personList = await personCollection.query(searchCondition); 
 console.log(personList);
+</code></pre>
+<p>To query all documents -- pass empty search condition</p>
+<pre><code>personList = await personCollection.query([]); 
 </code></pre>
 <h2 id="query-single-document-with-key">Query Single Document with Key</h2>
 <pre><code>let p: Person;
 p = await personCollection.getDocument(&quot;Varun Verma&quot;);
 console.log(&quot;Person Details&quot;, p);
+</code></pre>
+<h2 id="update-an-document">Update an Document</h2>
+<pre><code>let p: Person;
+p = await personCollection.getDocument(&quot;Varun Verma&quot;);
+p.city = &quot;Delhi&quot;;
+personCollection.update(p);
 </code></pre>
 <h2 id="delete-document">Delete Document</h2>
 <pre><code>await personCollection.delete(varun);
