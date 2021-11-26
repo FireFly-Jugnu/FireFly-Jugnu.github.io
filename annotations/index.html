@@ -358,6 +358,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#documentarrayfield" class="md-nav__link">
+    DocumentArrayField
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#autoincrement" class="md-nav__link">
     AutoIncrement
   </a>
@@ -470,6 +477,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#documentarrayfield" class="md-nav__link">
+    DocumentArrayField
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#autoincrement" class="md-nav__link">
     AutoIncrement
   </a>
@@ -530,6 +544,12 @@ The fields should be of type: <code>jugnu.Types.StorageFile</code></p>
     name: String,       // Name of file
     uri: String         // The file path
 }
+</code></pre>
+<h2 id="documentarrayfield">DocumentArrayField</h2>
+<p>If there is an array of other entities, then declare it using the <code>DocumentArrayField</code>. 
+Pass the entity name to the decorator so that the framework can understand the underlying entity object and its annotations.</p>
+<pre><code>@DocumentArrayField(InvoicePayment)
+payments: InvoicePayment[];
 </code></pre>
 <h2 id="autoincrement">AutoIncrement</h2>
 <p>Annotate a property with <code>@AutoIncrement</code></p>
