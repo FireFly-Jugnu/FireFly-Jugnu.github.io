@@ -323,8 +323,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#creating-document-with-collection-of-references" class="md-nav__link">
+    Creating Document with collection of references
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#query-single-document-with-key" class="md-nav__link">
     Query Single Document with Key
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-reference-of-the-document" class="md-nav__link">
+    Get Reference of the document
   </a>
   
 </li>
@@ -428,8 +442,22 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#creating-document-with-collection-of-references" class="md-nav__link">
+    Creating Document with collection of references
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#query-single-document-with-key" class="md-nav__link">
     Query Single Document with Key
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-reference-of-the-document" class="md-nav__link">
+    Get Reference of the document
   </a>
   
 </li>
@@ -517,6 +545,48 @@ personCollection.create(varun);
 </code></pre>
 <p>The person document is created with Address as a reference document
 <img alt="Person Document" src="../images/person_document.png" /> </p>
+<h2 id="creating-document-with-collection-of-references">Creating Document with collection of references</h2>
+<p>We have seen how to store the refence of other documents. Sometimes, we have to store a collection of document references. </p>
+<p>For e.g. store a list of many children in a Person Profile.</p>
+<pre><code>@FirebaseCollection()
+class Person {
+    @DocumentKey(jugnu.Types.DocumentKeyType.UserDefined)
+    id: string;
+
+    @DocumentField
+    name: string;
+
+    @DocumentField
+    parent: Person;     // Reference to Self Collection
+
+    @DocumentArrayField(Person)
+    children: Person[];   // Reference to Self Collection
+
+    constructor(id: string){
+        this.id = this.name = id;
+        this.children = [];
+    }
+}
+
+const createFunction = async() =&gt; { 
+
+    const vv = new Person(&quot;Varun&quot;);
+
+    vv.parent = new Person(&quot;Papa&quot;);
+
+    const beta = new Person(&quot;Beta&quot;);
+    const beti = new Person(&quot;Beti&quot;);
+
+    vv.children.push(beta);
+    vv.children.push(beti);
+
+    const id = await personCollection.create(vv);
+    console.log(vv);
+
+};
+</code></pre>
+<p>The peron document is created with references
+<img alt="Person Document" src="../images/Person_Doc2.png" /> </p>
 <h2 id="query-single-document-with-key">Query Single Document with Key</h2>
 <p>Querying document will also query the referenced documents and populate their properties.</p>
 <pre><code>let p: Person;
@@ -534,6 +604,11 @@ console.log(&quot;Person Details&quot;, p);
   },
   name: 'Varun Verma'
 }
+</code></pre>
+<h2 id="get-reference-of-the-document">Get Reference of the document</h2>
+<p>To get a reference of the document : </p>
+<pre><code>const addr = new Address(&quot;Home&quot;);
+const addressRef = addressCollection.getReference(addr);
 </code></pre>
 <h2 id="delete-document">Delete Document</h2>
 <p>Delete will delete only the main document. The referenced document will not be deleted.</p>
